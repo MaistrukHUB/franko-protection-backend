@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  postgresql:
+    image: postgres
+    container_name: franko-protection
+    ports:
+      - '5433:5432'  # Змінив порт на 5433
+    environment:
+      - POSTGRES_HOST=localhost
+      - POSTGRES_USER=franko-protection
+      - POSTGRES_PASSWORD=franko-protection
+      - POSTGRES_DATABASE=franko-protection
+    command: postgres
+    restart: always
+
+  redis:
+    image: redis:alpine3.14
+    container_name: redis-franko-protection
+    ports:
+      - '6379:6379'  # Змінив порт на 6379
