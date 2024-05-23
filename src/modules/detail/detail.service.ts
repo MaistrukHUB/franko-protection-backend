@@ -234,7 +234,7 @@ export class DetailsService {
   private mapDetailToResponse(detail: Detail): DetailResponseDTO {
     const finalCost = this.calculateFinalCost(detail.cost, detail.sale?.sale);
     return {
-      id:detail.id,
+      id: detail.id,
       name: detail.name,
       about: detail.about,
       material: detail.material,
@@ -331,7 +331,7 @@ export class DetailsService {
     return createdDetail;
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: number): Promise<boolean> {
     await this.imageModel.destroy({ where: { detailId: id } });
     await this.colorModel.destroy({ where: { detailId: id } });
     await this.yearModel.destroy({ where: { detailId: id } });
@@ -339,6 +339,7 @@ export class DetailsService {
     await this.motorcycleModel.destroy({ where: { detailId: id } });
 
     await this.detailModel.destroy({ where: { id } });
+    return true;
   }
 
   async update(
