@@ -3,16 +3,12 @@ import { InjectModel } from '@nestjs/sequelize';
 import { User } from './models/user.model';
 import * as bcrypt from 'bcrypt';
 import { CreateUserDTO, UpdateUserDTO } from './dto';
-import { Cart } from '../cart/models/cart.model';
-import { CartProduct } from '../cartProduct/models/cartProduct.model';
 import { AppError } from 'src/common/errors/errors';
-import { CartService } from '../cart/cart.service';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectModel(User) private readonly userRepository: typeof User,
-    private readonly cartRepository: CartService,
   ) {}
 
   async hashPassword(password: string): Promise<string> {
@@ -49,7 +45,9 @@ export class UserService {
     try {
       return await this.userRepository.findOne({
         where: { email },
-        attributes: { exclude: ['password'] },
+        attributes: {
+          exclude: ['password', 'id', 'role', 'createdAt', 'updatedAt'],
+        },
       });
     } catch (error) {
       if (error instanceof BadRequestException) {

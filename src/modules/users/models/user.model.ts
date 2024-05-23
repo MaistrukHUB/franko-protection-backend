@@ -1,5 +1,4 @@
 import { Table, Column, Model, HasMany } from 'sequelize-typescript';
-import { Cart } from 'src/modules/cart/models/cart.model';
 
 @Table
 export class User extends Model {
@@ -22,9 +21,4 @@ export class User extends Model {
   })
   role: string;
 
-  @HasMany(() => Cart, {
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
-  })
-  cart: Cart[];
 }

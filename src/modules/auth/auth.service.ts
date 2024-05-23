@@ -23,8 +23,7 @@ export class AuthService {
       await this.userService.createUser(dto);
       const user = await this.userService.publicUser(dto.email);
       const token = await this.tokenService.generationJwtToken(user);
-      // return { user, token };
-      return { token };
+      return { user, token };
     } catch (error) {
       if (error instanceof BadRequestException) {
         throw error;
@@ -48,8 +47,7 @@ export class AuthService {
       }
       const user = await this.userService.publicUser(dto.email);
       const token = await this.tokenService.generationJwtToken(user);
-      // return { user, token };
-      return { token };
+      return { user, token };
     } catch (error) {
       if (error instanceof BadRequestException) {
         throw error;

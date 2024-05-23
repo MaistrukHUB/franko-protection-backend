@@ -8,10 +8,18 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { User } from '../users/models/user.model';
 import { AuthModule } from '../auth/auth.module';
 import { TokenModule } from '../token/token.module';
-import { Cart } from '../cart/models/cart.model';
-import { CartProduct } from '../cartProduct/models/cartProduct.model';
-import { CartModule } from '../cart/cart.module';
-import { CartProductModule } from '../cartProduct/cartProduct.module';
+import { DetailsModule } from '../detail/detail.module';
+import { ImagesModule } from '../images/images.module';
+import { ColorsModule } from '../colors/colors.module';
+import { YearsModule } from '../years/years.module';
+import { SalesModule } from '../sales/sales.module';
+import { MotorcyclesModule } from '../motorcycles/motorcycles.module';
+import { Color } from '../colors/models/color.module';
+import { Detail } from '../detail/models/detail.model';
+import { Image } from '../images/models/image.model';
+import { Motorcycle } from '../motorcycles/models/motorcycle.model';
+import { Sale } from '../sales/models/sales.model';
+import { Year } from '../years/models/years.model';
 
 @Module({
   imports: [
@@ -32,14 +40,18 @@ import { CartProductModule } from '../cartProduct/cartProduct.module';
         database: configService.get('db_name'),
         synchronize: true,
         autoLoadModels: true,
-        models: [User, , Cart, CartProduct, ],
+        models: [User, Color, Detail, Image, Motorcycle, Sale, Year],
       }),
     }),
     UserModule,
     AuthModule,
     TokenModule,
-    CartModule,
-    CartProductModule,
+    DetailsModule,
+    ImagesModule,
+    ColorsModule,
+    YearsModule,
+    SalesModule,
+    MotorcyclesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
