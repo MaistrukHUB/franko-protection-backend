@@ -46,7 +46,9 @@ export class AuthService {
         throw new BadRequestException(AppError.WRONG_DATA);
       }
       const user = await this.userService.publicUser(dto.email);
-      const token = await this.tokenService.generationJwtToken(user);
+      const userForJwt = await this.userService.jwtUser(dto.email);
+
+      const token = await this.tokenService.generationJwtToken(userForJwt);
       return { user, token };
     } catch (error) {
       if (error instanceof BadRequestException) {

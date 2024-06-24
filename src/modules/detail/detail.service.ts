@@ -245,6 +245,7 @@ export class DetailsService {
       colors: detail.colors.map((color) => color.color),
       years: detail.years.map((year) => year.year),
       sale: detail.sale?.sale,
+      category: detail.category,
       motorcycles: detail.motorcycles.map(
         (motorcycle) => motorcycle.motorcycle,
       ),
@@ -283,6 +284,7 @@ export class DetailsService {
       colors,
       years,
       sale,
+      category,
       motorcycles,
     } = createDetailDTO;
 
@@ -292,6 +294,7 @@ export class DetailsService {
       material,
       weight,
       cost,
+      category,
     });
 
     if (imgs) {
@@ -347,6 +350,7 @@ export class DetailsService {
     updateDetailDTO: UpdateDetailDTO,
   ): Promise<DetailResponseDTO> {
     const {
+      category,
       name,
       about,
       material,
@@ -370,6 +374,7 @@ export class DetailsService {
       material,
       weight,
       cost,
+      category,
     });
 
     if (imgs) {

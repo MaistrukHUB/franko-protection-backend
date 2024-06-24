@@ -4,6 +4,7 @@ import {
   IsString,
   ArrayMinSize,
   IsOptional,
+  IsIn,
 } from 'class-validator';
 
 export class DetailResponseDTO {
@@ -51,4 +52,8 @@ export class DetailResponseDTO {
   @ArrayMinSize(1)
   @IsString({ each: true })
   motorcycles: string[];
+
+  @IsString()
+  @IsIn(['Захист радіаторів', 'Захист двигуна', 'Інший захист'])
+  category: string;
 }

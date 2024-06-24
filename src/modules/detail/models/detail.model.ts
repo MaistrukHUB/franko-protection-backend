@@ -13,6 +13,7 @@ import {
   Min,
   IsArray,
   ArrayMinSize,
+  IsIn,
 } from 'class-validator';
 import { Color } from 'src/modules/colors/models/color.module';
 import { Image } from 'src/modules/images/models/image.model';
@@ -63,6 +64,15 @@ export class Detail extends Model<Detail> {
     allowNull: false,
   })
   weight: number;
+
+  @IsNotEmpty()
+  @IsString()
+  @IsIn(['Захист радіаторів', 'Захист двигуна', 'Інший захист'])
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  category: string;
 
   @HasMany(() => Image)
   imgs: Image[];

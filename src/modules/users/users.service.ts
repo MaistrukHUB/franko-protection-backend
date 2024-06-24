@@ -46,7 +46,22 @@ export class UserService {
       return await this.userRepository.findOne({
         where: { email },
         attributes: {
-          exclude: ['password', 'id', 'role', 'createdAt', 'updatedAt'],
+          exclude: ['password', 'role', 'createdAt', 'updatedAt'],
+        },
+      });
+    } catch (error) {
+      if (error instanceof BadRequestException) {
+        throw error;
+      }
+      throw new Error(error);
+    }
+  }
+  async jwtUser(email: string): Promise<User> {
+    try {
+      return await this.userRepository.findOne({
+        where: { email },
+        attributes: {
+          exclude: ['password', 'id', 'createdAt', 'updatedAt'],
         },
       });
     } catch (error) {

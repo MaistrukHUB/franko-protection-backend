@@ -12,6 +12,7 @@ import { DetailsService } from './detail.service';
 import { CreateDetailDTO, UpdateDetailDTO } from './dto';
 import { DetailResponseDTO } from './response';
 import { JwtAuthGuard } from 'src/guards/jwt-guard';
+import { JwtAdminGuard } from 'src/guards/role-guard';
 
 @Controller('detail')
 export class DetailController {
@@ -23,12 +24,12 @@ export class DetailController {
     return this.detailService.create(createDetailDTO);
   }
 
-  @Get()
+  @Get("get-all")
   findAll(): Promise<DetailResponseDTO[]> {
     return this.detailService.findAll();
   }
 
-  @Get(':id')
+  @Get('get-one/:id')
   findOne(@Param('id') id: string): Promise<DetailResponseDTO> {
     return this.detailService.findOne(id);
   }
@@ -39,7 +40,7 @@ export class DetailController {
     return this.detailService.remove(+id);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAdminGuard)
   @Patch(':id')
   update(
     @Param('id') id: string,
